@@ -31,9 +31,9 @@ class CSVTimeSeriesFile():
                         anno_curr = elements[0].split("-")[0]
                         mese_curr = elements[0].split("-")[1]
                         if anno_curr.isdigit() and mese_curr.isdigit():
-                            if 1 <= int(mese_curr) <= 9:
-                                mese_curr = f"{int(mese_curr):02d}"  #se il mese è nel formato 1,2,..,9, aggiunge uno 0 all'inizio in modo che possa essere accettato
-                            else: str(mese_curr)
+                            #if 1 <= int(mese_curr) <= 9:
+                            #    mese_curr = f"{int(mese_curr):02d}"  #se il mese è nel formato 1,2,..,9, aggiunge uno 0 all'inizio in modo che possa essere accettato
+                            #else: str(mese_curr)
                             mesi = ['01','02','03','04','05','06','07','08','09','10','11','12']
                             if mese_curr in mesi and int(anno_curr) >= 0 and int(anno_curr)<=2024: #verifico che il mese e l'anno siano validi (anno max 2024)
                                 for item in list:
@@ -41,10 +41,10 @@ class CSVTimeSeriesFile():
                                         test = False
                                     anno_prec = item[0].split("-")[0]
                                     mese_prec = item[0].split("-")[1]
-                                    if 1 <= int(mese_prec) <= 9:
-                                        mese_prec = f"{int(mese_prec):02d}"  #aggiungo lo zero all'inizio altrimenti non verifica l'ordine
-                                    else: 
-                                        str(mese_prec)
+                                    #if 1 <= int(mese_prec) <= 9:
+                                    #    mese_prec = f"{int(mese_prec):02d}"  #aggiungo lo zero all'inizio altrimenti non verifica l'ordine
+                                    #else: 
+                                    #    str(mese_prec)
                                     if int(anno_curr) < int(anno_prec):
                                         test_2 = False
                                     if int(anno_curr) == int(anno_prec) and int(mese_curr)<int(mese_prec):
