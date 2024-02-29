@@ -65,3 +65,53 @@ class CSVTimeSeriesFile():
             lista_convertita = [[elemento[0], int(elemento[1])] for elemento in list] #list comprehension per convertire a int il secondo valore delle liste interne
             mio_file.close()
             return lista_convertita
+             
+
+
+class ExamException(Exception):
+    pass
+
+def find_min_max(time_series):
+    dict = {}
+    val_min = 0
+    val_max = 0
+    min = []
+    max = []
+    for element in time_series:             
+        anno = element[0].split("-")[0]
+        mese = element[0].split("-")[1]
+        valore = element[1]
+        if anno not in dict:
+            min = []
+            max = []
+            val_min = valore
+            val_max = valore
+            min.append(mese)
+            max.append(mese)
+            dict_interno = {"min": min, "max":max}
+            dict[anno] = dict_interno #aggiunge il valore 'dict_interno' alla chiave 'anno'
+        else:
+            flag = False
+            if valore>val_max:
+                flag = True
+                max.clear()
+                val_max = valore
+                max.append(mese)
+            else: 
+                if valore == val_max:
+                    flag = True
+                    max.append(mese)
+            
+            if valore<val_min:
+                flag = True
+                min.clear()
+                val_min = valore
+                min.append(mese)
+            else:
+                if valore == val_min:
+                    flag = True
+                    min.append(mese)
+            if flag: #modifica il 'dict_interno' solo se variano le liste max,min
+                dict_interno = {"min": min, "max":max}
+                dict[anno] = dict_interno #modifica il valore della chiave 'anno' con il nuovo 'dict_interno'
+    return dict
