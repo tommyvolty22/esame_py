@@ -66,8 +66,6 @@ class CSVTimeSeriesFile():
             mio_file.close()
             return lista_convertita
              
-
-
 class ExamException(Exception):
     pass
 
